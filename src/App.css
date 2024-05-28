@@ -1,7 +1,24 @@
+.container {
+  margin: 10px auto;
+ 
+}
 
-@media (max-width: 720px) {
-.animation {
-      display: none;
-    }
+
+@media (min-width: 1024px) {
+  .container {
+    max-width: 70%;
   }
-  
+}
+
+.text-field {
+  font-size: 20px;
+}
+
+
+
+
+@media(max-width:600px){
+  .container{
+    width: 100;
+  }
+}
