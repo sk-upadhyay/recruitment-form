@@ -29,7 +29,7 @@ function Domain() {
   };
 
   return (
-    <div className="container px-4 py-4">
+    <div className="container mx-auto px-4 py-4">
       <FormControl>
         <FormLabel id="domain-label" required sx={{ fontSize: 20 }}>Domain</FormLabel>
         <RadioGroup row aria-labelledby="domain-label" name="row-radio-buttons-group" value={selectedDomain} onChange={handleDomainChange}>

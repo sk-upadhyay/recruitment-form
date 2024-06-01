@@ -9,7 +9,7 @@ function FormHeading() {
   };
 
   return (
-    <div className="container px-4 py-4">
+    <div className="container mx-auto px-4 py-4">
       <Grid align='center'>
         <Avatar
           sx={{ width: 150, height: 150, bgcolor: '#f2f2f282' }}

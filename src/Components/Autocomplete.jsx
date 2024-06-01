@@ -16,7 +16,7 @@ function Autocomplete1() {
   ];
 
   return (
-    <div className="container px-4 py-4">
+    <div className="container mx-auto px-4 py-4">
       <Autocomplete
         disablePortal
         id="YearOfStudy"
