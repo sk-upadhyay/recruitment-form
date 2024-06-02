@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { TextField, Autocomplete, FormControl, RadioGroup, FormControlLabel, Radio, FormLabel } from '@mui/material';
+import { TextField, Autocomplete, FormControl, RadioGroup, FormControlLabel, Radio, FormLabel, FormHelperText } from '@mui/material';
 
-function Domain() {
+function Domain({ onChange, errors }) {
   const ForNonTechDomains = [
     { label: 'Video Editors' },
     { label: 'Social Media Engagement' },
@@ -25,17 +25,30 @@ function Domain() {
   const [selectedDomain, setSelectedDomain] = useState('');
 
   const handleDomainChange = (event) => {
-    setSelectedDomain(event.target.value);
+    const value = event.target.value;
+    setSelectedDomain(value);
+    onChange('domainType', value);
+  };
+
+  const handleAutoCompleteChange = (event, value) => {
+    onChange('domain', value ? value.label : '');
   };
 
   return (
     <div className="container mx-auto px-4 py-4">
-      <FormControl>
+      <FormControl error={!!errors.domainType}>
         <FormLabel id="domain-label" required sx={{ fontSize: 20 }}>Domain</FormLabel>
-        <RadioGroup row aria-labelledby="domain-label" name="row-radio-buttons-group" value={selectedDomain} onChange={handleDomainChange}>
+        <RadioGroup
+          row
+          aria-labelledby="domain-label"
+          name="row-radio-buttons-group"
+          value={selectedDomain}
+          onChange={handleDomainChange}
+        >
           <FormControlLabel value="Tech" control={<Radio />} label="Tech" sx={{ fontSize: 20 }} />
           <FormControlLabel value="Non-Tech" control={<Radio />} label="Non-Tech" sx={{ fontSize: 20 }} />
         </RadioGroup>
+        {errors.domainType && <FormHelperText>{errors.domainType}</FormHelperText>}
       </FormControl>
       {selectedDomain === 'Tech' && (
         <Autocomplete
@@ -43,7 +56,17 @@ function Domain() {
           id="TechDomains"
           options={ForTechDomains}
           fullWidth
-          renderInput={(params) => <TextField {...params} label="Tech Domains" required sx={{ fontSize: 20 }} />}
+          onChange={handleAutoCompleteChange}
+          renderInput={(params) => (
+            <TextField
+              {...params}
+              label="Tech Domains"
+              required
+              error={!!errors.domain}
+              helperText={errors.domain}
+              sx={{ fontSize: 20 }}
+            />
+          )}
         />
       )}
       {selectedDomain === 'Non-Tech' && (
@@ -52,7 +75,17 @@ function Domain() {
           id="NonTechDomains"
           options={ForNonTechDomains}
           fullWidth
-          renderInput={(params) => <TextField {...params} label="Non-Tech Domains" required sx={{ fontSize: 20 }} />}
+          onChange={handleAutoCompleteChange}
+          renderInput={(params) => (
+            <TextField
+              {...params}
+              label="Non-Tech Domains"
+              required
+              error={!!errors.domain}
+              helperText={errors.domain}
+              sx={{ fontSize: 20 }}
+            />
+          )}
         />
       )}
     </div>
