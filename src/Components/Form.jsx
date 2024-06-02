@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Grid, Paper, Button, Box } from '@mui/material';
 import FormHeading from './Formheading';
 import TextInput from './Textinput';
@@ -7,6 +7,7 @@ import Autocomplete1 from './Autocomplete.jsx';
 import Miscellaneous from './Miscellaneous.jsx';
 import Domain from './Domain';
 import Animation from './Animation';
+import Submit from './Submit.jsx';
 
 function Form() {
   const paperStyle = {
@@ -17,36 +18,43 @@ function Form() {
     backgroundColor: 'rgba(240, 240, 240, 0.75)',
   };
 
-  // Function to handle form submission
+  const [isSubmitted, setIsSubmitted] = useState(false);
+
   const handleSubmit = (event) => {
-    event.preventDefault();
-    // Add your form submission logic here
-    console.log('Form submitted');
+    event.preventDefault(); // Prevent default form submission behavior
+    // Perform form submission logic here
+    setIsSubmitted(true);
   };
 
   return (
     <div className='mx-auto'>
-      <Grid container sx={{ justifyContent: { xs: 'center', lg: 'center' }}}>
-        <Grid item xs={5} lg={5}>
-          <Paper elevation={10} style={paperStyle}>
-            <FormHeading />
-            <TextInput />
-            <Gender />
-            <Autocomplete1 />
-            <Domain />
-            <Miscellaneous />
-            {/* Centered Submit Button */}
-            <Box textAlign="center" marginTop={2}>
-              <Button variant="contained" color="primary" onClick={handleSubmit}>
-                Submit
-              </Button>
-            </Box>
-          </Paper>
+      {!isSubmitted ? (
+        // Form content
+        <Grid container sx={{ justifyContent: { xs: 'center', lg: 'center' }}}>
+          <Grid item xs={5} lg={5}>
+            <Paper elevation={10} style={paperStyle}>
+              <FormHeading />
+              <TextInput />
+              <Gender />
+              <Autocomplete1 />
+              <Domain />
+              <Miscellaneous />
+              {/* Centered Submit Button */}
+              <Box textAlign="center" marginTop={2}>
+                <Button variant="contained" color="primary" onClick={handleSubmit}>
+                  Submit
+                </Button>
+              </Box>
+            </Paper>
+          </Grid>
+          <Grid item xs={5} lg={5} display={{xs:'none', lg: 'block' }}>
+            <Animation />
+          </Grid>
         </Grid>
-        <Grid item xs={5} lg={5} display={{xs:'none', lg: 'block' }}>
-          <Animation />
-        </Grid>
-      </Grid>
+      ) : (
+        
+        <Submit />
+      )}
     </div>
   );
 }

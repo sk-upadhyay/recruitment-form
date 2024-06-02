@@ -8,6 +8,7 @@ function Animation() {
     <div className="container mx-auto px-4 py-4">
       <Lottie animationData={phone} loop={true} style={{ width: '100%', height: 'auto' }} />
       <Lottie animationData={robo} loop={true} style={{ width: '100%', height: 'auto' }} />
+      
     </div>
   );
 }
